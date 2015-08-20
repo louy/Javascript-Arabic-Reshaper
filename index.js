@@ -3,7 +3,20 @@
  * https://github.com/louy/Javascript-Arabic-Reshaper
  * Based on (http://git.io/vsnAd)
  */
-(function() {
+(function (root, factory) {
+  var name = 'ArabicReshaper';
+  /* global define, module */
+
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as an anonymous module.
+    define(factory);
+  } else if (typeof module === 'object' && module.exports) {
+    module.exports = factory();
+  } else {
+    // Browser globals
+    root[name] = factory();
+  }
+}(this, function () {
 	var charsMap = [
 			/* code,isolated,initial, medial, final */
 			[ 0x0621, 0xFE80, null  , null  , null   ], /* HAMZA */
@@ -92,7 +105,7 @@
 			0x06ED, /* ARABIC SMALL LOW MEEM */
 		];
 
-	function CharacterMapContains( c ) {
+	function characterMapContains( c ) {
 		for ( var i = 0 ; i < charsMap.length ; ++i ) {
 			if ( charsMap[ i ][0] === c ) {
 				return true;
@@ -100,7 +113,7 @@
 		}
 		return false;
 	}
-	function GetCharRep( c ) {
+	function getCharRep( c ) {
 		for ( var i = 0 ; i < charsMap.length ; ++i ) {
 			if ( charsMap[ i ][0] === c ) {
 				return charsMap[i];
@@ -108,7 +121,7 @@
 		}
 		return false;
 	}
-	function GetCombCharRep( c1, c2 ) {
+	function getCombCharRep( c1, c2 ) {
 		for ( var i = 0 ; i < combCharsMap.length ; ++i ) {
 			if ( combCharsMap[i][0][0] === c1 && combCharsMap[i][0][1] === c2 ) {
 				return combCharsMap[i];
@@ -116,7 +129,7 @@
 		}
 		return false;
 	}
-	function IsTransparent( c ) {
+	function isTransparent( c ) {
 		for ( var i = 0 ; i < transChars.length ; ++i ) {
 			if ( transChars[i] === c ) {
 				return true;
@@ -126,15 +139,15 @@
 	}
 
 
-	ArabicReshaper = this.ArabicReshaper = {
+	return {
 		convertArabic: function( normal ) {
 			var crep,
 				combcrep,
-				shaped = "";
+				shaped = '';
 
 			for ( var i = 0 ; i < normal.length ; ++i ) {
 				var current = normal.charCodeAt(i);
-				if ( CharacterMapContains( current ) ) {
+				if ( characterMapContains( current ) ) {
 					var prev = null,
 						next = null,
 						prevID = i - 1,
@@ -146,13 +159,13 @@
 					 current character.
 					 */
 					for ( ; prevID >= 0 ; --prevID ) {
-						if ( !IsTransparent( normal.charCodeAt(prevID) ) ) {
+						if ( !isTransparent( normal.charCodeAt(prevID) ) ) {
 							break;
 						}
 					}
 
 					prev = ( prevID >= 0 ) ? normal.charCodeAt(prevID) : null;
-					crep = prev ? GetCharRep( prev ) : false;
+					crep = prev ? getCharRep( prev ) : false;
 					if( crep[2] === null && crep[3] === null ) {
 						prev = null;
 					}
@@ -163,13 +176,13 @@
 					 current character.
 					 */
 					for ( ; nextID < normal.length ; ++nextID ) {
-						if ( !IsTransparent( normal.charCodeAt(nextID) ) ) {
+						if ( !isTransparent( normal.charCodeAt(nextID) ) ) {
 							break;
 						}
 					}
 
 					next = ( nextID <= normal.length ) ? normal.charCodeAt(nextID) : null;
-					crep = next ? GetCharRep( next ) : false;
+					crep = next ? getCharRep( next ) : false;
 					if( crep[3] === null && crep[4] === null ) {
 						next = null;
 					}
@@ -177,7 +190,7 @@
 					/* Combinations */
 					if ( current === 0x0644 && next != null &&
 						( next === 0x0622 || next === 0x0623 || next === 0x0625 || next === 0x0627) ) {
-						combcrep = GetCombCharRep(current, next);
+						combcrep = getCombCharRep(current, next);
 						if ( prev != null ) {
 							shaped += String.fromCharCode(combcrep[4]);
 						} else {
@@ -187,7 +200,7 @@
 						continue;
 					}
 
-					crep = GetCharRep( current );
+					crep = getCharRep( current );
 
 					/* Medial */
 					if ( prev != null && next != null && crep[3] != null ) {
@@ -252,5 +265,4 @@
 			return toReturn;
 		},
 	};
-
-})();
+}));

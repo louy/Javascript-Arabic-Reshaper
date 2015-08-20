@@ -1,0 +1,22 @@
+{
+  "name": "arabic-reshaper",
+  "version": "0.0.0",
+  "description": "Reshapes Arabic words to work in non-supported environments.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/louy/Javascript-Arabic-Reshaper.git"
+  },
+  "author": "Louay Alakkad <louay@alakkad.me>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/louy/Javascript-Arabic-Reshaper/issues"
+  },
+  "homepage": "https://github.com/louy/Javascript-Arabic-Reshaper#readme"
+}

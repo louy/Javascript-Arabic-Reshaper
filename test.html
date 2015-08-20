@@ -2,9 +2,10 @@
 <meta charset="utf-8" />
 <title>تجربة</title>
 </head><body>
-<script src="converter.js"></script>
+<script src="index.js"></script>
 <script>
-	document.write( ArabicReshaper.convertArabic("<p>السلام عليكم</p>") );
-	document.write( ArabicReshaper.convertArabicBack("<p>ﺍﻟﺴﻼﻡ ﻋﻠﻴﻜﻢ</p>") );
+  /* global document, ArabicReshaper */
+  document.write( ArabicReshaper.convertArabic('<p>السلام عليكم</p>') );
+  document.write( ArabicReshaper.convertArabicBack('<p>ﺍﻟﺴﻼﻡ ﻋﻠﻴﻜﻢ</p>') );
 </script>
 </body></html>
