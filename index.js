@@ -4,18 +4,18 @@
  * Based on (http://git.io/vsnAd)
  */
 (function (root, factory) {
-  var name = 'ArabicReshaper';
-  /* global define, module */
+	var name = 'ArabicReshaper';
+	/* global define, module */
 
-  if (typeof define === 'function' && define.amd) {
-    // AMD. Register as an anonymous module.
-    define(factory);
-  } else if (typeof module === 'object' && module.exports) {
-    module.exports = factory();
-  } else {
-    // Browser globals
-    root[name] = factory();
-  }
+	if (typeof define === 'function' && define.amd) {
+		// AMD. Register as an anonymous module.
+		define(factory);
+	} else if (typeof module === 'object' && module.exports) {
+		module.exports = factory();
+	} else {
+		// Browser globals
+		root[name] = factory();
+	}
 }(this, function () {
 	var charsMap = [
 			/* code,isolated,initial, medial, final */
@@ -149,9 +149,9 @@
 				var current = normal.charCodeAt(i);
 				if ( characterMapContains( current ) ) {
 					var prev = null,
-						next = null,
-						prevID = i - 1,
-						nextID = i + 1;
+							next = null,
+							prevID = i - 1,
+							nextID = i + 1;
 
 					/*
 					 Transparent characters have no effect in the shaping process.
@@ -227,9 +227,9 @@
 		// convert from Arabic Presentation Forms B
 		convertArabicBack: function( apfb ) {
 			var toReturn = '',
-				  selectedChar;
+					selectedChar;
 
-      var i, j;
+			var i, j;
 
 			theLoop:
 			for( i = 0 ; i < apfb.length ; ++i ) {
@@ -237,26 +237,26 @@
 
 				for( j = 0 ; j < charsMap.length ; ++j ) {
 					if( charsMap[j][4] === selectedChar ||
-            charsMap[j][2] === selectedChar ||
+						charsMap[j][2] === selectedChar ||
 						charsMap[j][1] === selectedChar ||
-            charsMap[j][3] === selectedChar ) {
+						charsMap[j][3] === selectedChar ) {
 
-            toReturn += String.fromCharCode(charsMap[j][0]);
+						toReturn += String.fromCharCode(charsMap[j][0]);
 
-            continue theLoop;
+						continue theLoop;
 					}
 				}
 
 				for( j = 0 ; j < combCharsMap.length ; ++j ) {
 					if( combCharsMap[j][4] === selectedChar ||
-            combCharsMap[j][2] === selectedChar ||
+						combCharsMap[j][2] === selectedChar ||
 						combCharsMap[j][1] === selectedChar ||
-            combCharsMap[j][3] === selectedChar ) {
+						combCharsMap[j][3] === selectedChar ) {
 
-            toReturn += String.fromCharCode(combCharsMap[j][0][0]) +
-                        String.fromCharCode(combCharsMap[j][0][1]);
+						toReturn += String.fromCharCode(combCharsMap[j][0][0]) +
+												String.fromCharCode(combCharsMap[j][0][1]);
 
-            continue theLoop;
+						continue theLoop;
 					}
 				}
 
