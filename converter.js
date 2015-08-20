@@ -1,6 +1,7 @@
 /**
- * Javascript Arabic Reshaper by Louy Alakkad (https://github.com/louy/Javascript-Arabic-Reshaper)
- * Based on (https://raw.github.com/Accorpa/Arabic-Converter-From-and-To-Arabic-Presentation-Forms-B/)
+ * Javascript Arabic Reshaper by Louy Alakkad
+ * https://github.com/louy/Javascript-Arabic-Reshaper
+ * Based on (http://git.io/vsnAd)
  */
 (function() {
 	var charsMap = [
@@ -93,7 +94,7 @@
 
 	function CharacterMapContains( c ) {
 		for ( var i = 0 ; i < charsMap.length ; ++i ) {
-			if ( charsMap[ i ][0] == c ) {
+			if ( charsMap[ i ][0] === c ) {
 				return true;
 			}
 		}
@@ -101,7 +102,7 @@
 	}
 	function GetCharRep( c ) {
 		for ( var i = 0 ; i < charsMap.length ; ++i ) {
-			if ( charsMap[ i ][0] == c ) {
+			if ( charsMap[ i ][0] === c ) {
 				return charsMap[i];
 			}
 		}
@@ -109,7 +110,7 @@
 	}
 	function GetCombCharRep( c1, c2 ) {
 		for ( var i = 0 ; i < combCharsMap.length ; ++i ) {
-			if ( combCharsMap[i][0][0] == c1 && combCharsMap[i][0][1] == c2 ) {
+			if ( combCharsMap[i][0][0] === c1 && combCharsMap[i][0][1] === c2 ) {
 				return combCharsMap[i];
 			}
 		}
@@ -117,7 +118,7 @@
 	}
 	function IsTransparent( c ) {
 		for ( var i = 0 ; i < transChars.length ; ++i ) {
-			if ( transChars[i] == c ) {
+			if ( transChars[i] === c ) {
 				return true;
 			}
 		}
@@ -138,7 +139,7 @@
 						next = null,
 						prevID = i - 1,
 						nextID = i + 1;
-					
+
 					/*
 					 Transparent characters have no effect in the shaping process.
 					 So, ignore all the transparent characters that are BEFORE the
@@ -152,7 +153,7 @@
 
 					prev = ( prevID >= 0 ) ? normal.charCodeAt(prevID) : null;
 					crep = prev ? GetCharRep( prev ) : false;
-					if( crep[2] == null && crep[3] == null ) {
+					if( crep[2] === null && crep[3] === null ) {
 						prev = null;
 					}
 
@@ -169,13 +170,13 @@
 
 					next = ( nextID <= normal.length ) ? normal.charCodeAt(nextID) : null;
 					crep = next ? GetCharRep( next ) : false;
-					if( crep[3] == null && crep[4] == null ) {
+					if( crep[3] === null && crep[4] === null ) {
 						next = null;
 					}
 
 					/* Combinations */
-					if ( current == 0x0644 && next != null &&
-						( next == 0x0622 || next == 0x0623 || next == 0x0625 || next == 0x0627) ) {
+					if ( current === 0x0644 && next != null &&
+						( next === 0x0622 || next === 0x0623 || next === 0x0625 || next === 0x0627) ) {
 						combcrep = GetCombCharRep(current, next);
 						if ( prev != null ) {
 							shaped += String.fromCharCode(combcrep[4]);
@@ -185,14 +186,14 @@
 						++ i;
 						continue;
 					}
-					
+
 					crep = GetCharRep( current );
-					
+
 					/* Medial */
 					if ( prev != null && next != null && crep[3] != null ) {
 						shaped += String.fromCharCode(crep[3]);
 						continue;
-					} else /* Final */ 
+					} else /* Final */
 						if ( prev != null && crep[4] != null ) {
 						shaped += String.fromCharCode(crep[4]);
 						continue;
@@ -207,31 +208,42 @@
 					shaped += String.fromCharCode(current);
 				}
 			}
-			return shaped; 
+			return shaped;
 		},
 
 		// convert from Arabic Presentation Forms B
 		convertArabicBack: function( apfb ) {
-			var toReturn = "",
-				selectedChar;
-			
+			var toReturn = '',
+				  selectedChar;
+
+      var i, j;
+
 			theLoop:
-			for( var i = 0 ; i < apfb.length ; ++i ) {
+			for( i = 0 ; i < apfb.length ; ++i ) {
 				selectedChar = apfb.charCodeAt(i);
 
-				for( var j = 0 ; j < charsMap.length ; ++j ) {
-					if( charsMap[j][4] == selectedChar || charsMap[j][2] == selectedChar || 
-						charsMap[j][1] == selectedChar || charsMap[j][3] == selectedChar ) {
-						toReturn += String.fromCharCode(charsMap[j][0]);
-						continue theLoop;
+				for( j = 0 ; j < charsMap.length ; ++j ) {
+					if( charsMap[j][4] === selectedChar ||
+            charsMap[j][2] === selectedChar ||
+						charsMap[j][1] === selectedChar ||
+            charsMap[j][3] === selectedChar ) {
+
+            toReturn += String.fromCharCode(charsMap[j][0]);
+
+            continue theLoop;
 					}
 				}
 
-				for( var j = 0 ; j < combCharsMap.length ; ++j ) {
-					if( combCharsMap[j][4] == selectedChar || combCharsMap[j][2] == selectedChar || 
-						combCharsMap[j][1] == selectedChar || combCharsMap[j][3] == selectedChar ) {
-						toReturn += String.fromCharCode(combCharsMap[j][0][0]) + String.fromCharCode(combCharsMap[j][0][1]);
-						continue theLoop;
+				for( j = 0 ; j < combCharsMap.length ; ++j ) {
+					if( combCharsMap[j][4] === selectedChar ||
+            combCharsMap[j][2] === selectedChar ||
+						combCharsMap[j][1] === selectedChar ||
+            combCharsMap[j][3] === selectedChar ) {
+
+            toReturn += String.fromCharCode(combCharsMap[j][0][0]) +
+                        String.fromCharCode(combCharsMap[j][0][1]);
+
+            continue theLoop;
 					}
 				}
 

@@ -1,0 +1,12 @@
+{
+    "preset": "airbnb",
+    "disallowSpaceAfterPrefixUnaryOperators": [
+      "+",
+      "-"
+    ],
+    "requireSpaceAfterPrefixUnaryOperators": [
+      "!"
+    ],
+    "disallowSpacesInsideObjectBrackets": "nested",
+    "disallowSpacesInsideParentheses": { "only": [ "{", "}" ] }
+}
