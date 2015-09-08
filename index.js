@@ -166,8 +166,8 @@
 
 					prev = ( prevID >= 0 ) ? normal.charCodeAt(prevID) : null;
 					crep = prev ? getCharRep( prev ) : false;
-					if( crep[2] === null && crep[3] === null ) {
-						prev = null;
+					if( ! crep || crep[2] == null && crep[3] == null ) {
+						prev = null; // prev character doesn’t connect with its successor
 					}
 
 					/*
@@ -183,8 +183,8 @@
 
 					next = ( nextID < normal.length ) ? normal.charCodeAt(nextID) : null;
 					crep = next ? getCharRep( next ) : false;
-					if( crep[3] === null && crep[4] === null ) {
-						next = null;
+					if( ! crep || crep[3] == null && crep[4] == null ) {
+						next = null; // next character doesn’t connect with its predecessor
 					}
 
 					/* Combinations */
