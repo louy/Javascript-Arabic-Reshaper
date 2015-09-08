@@ -7,7 +7,7 @@ root = true
 [*]
 
 # Change these settings to your own preference
-indent_style = tab
+indent_style = space
 indent_size = 2
 
 # We recommend you to keep these unchanged
@@ -18,6 +18,3 @@ insert_final_newline = true
 
 [*.md]
 trim_trailing_whitespace = false
-
-[*.yml]
-indent_style = space
