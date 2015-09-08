@@ -7,3 +7,12 @@
 [![VersionEye](https://img.shields.io/versioneye/d/nodejs/arabic-reshaper.svg)](https://www.versioneye.com/nodejs/arabic-reshaper/)
 
 Reshapes Arabic words to work in non-supported environments and with custom web fonts.
+
+## Installation
+
+    npm i --save arabic-reshaper
+
+## Usage
+
+    var ArabicReshaper = require('arabic-reshaper');
+    document.write(ArabicReshaper.convertArabic('السلام عليكم')); // outputs ﺍﻟﺴﻼﻡ ﻋﻠﻴﻜﻢ
