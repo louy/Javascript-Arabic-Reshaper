@@ -181,7 +181,7 @@
 						}
 					}
 
-					next = ( nextID <= normal.length ) ? normal.charCodeAt(nextID) : null;
+					next = ( nextID < normal.length ) ? normal.charCodeAt(nextID) : null;
 					crep = next ? getCharRep( next ) : false;
 					if( crep[3] === null && crep[4] === null ) {
 						next = null;
