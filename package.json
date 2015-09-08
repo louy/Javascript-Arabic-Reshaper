@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/louy/Javascript-Arabic-Reshaper#readme",
   "devDependencies": {
+    "chai": "^3.2.0",
     "codecov.io": "^0.1.6",
     "istanbul": "^0.3.18",
     "mocha": "^2.2.5",

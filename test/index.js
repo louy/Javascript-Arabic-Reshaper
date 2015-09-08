@@ -1,5 +1,5 @@
 /* global require, describe, it */
-var assert = require('assert');
+var expect = require('chai').expect;
 
 describe('ArabicReshaper', function() {
   var ArabicReshaper = require('..');
@@ -7,9 +7,10 @@ describe('ArabicReshaper', function() {
   var a = 'السلام عليكم', b = 'ﺍﻟﺴﻼﻡ ﻋﻠﻴﻜﻢ';
 
   it('should convert', function() {
-    assert.equal(b, ArabicReshaper.convertArabic(a));
+    expect(ArabicReshaper.convertArabic(a)).to.equal(b);
   });
+
   it('should convert back', function() {
-    assert.equal(a, ArabicReshaper.convertArabicBack(b));
+    expect(ArabicReshaper.convertArabicBack(b)).to.equal(a);
   });
 });
