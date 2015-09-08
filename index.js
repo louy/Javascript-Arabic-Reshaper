@@ -146,6 +146,25 @@
     return false;
   }
 
+  function getOriginalCharsFromCode(code) {
+    var j;
+
+    for (j = 0; j < charsMap.length; ++j) {
+      if (charsMap[j].indexOf(code) > -1) {
+        return String.fromCharCode(charsMap[j][0]);
+      }
+    }
+
+    for (j = 0; j < combCharsMap.length; ++j) {
+      if (combCharsMap[j].indexOf(code) > -1) {
+        return String.fromCharCode(combCharsMap[j][0][0]) +
+              String.fromCharCode(combCharsMap[j][0][1]);
+      }
+    }
+
+    return String.fromCharCode(code);
+  }
+
   return {
     convertArabic: function(normal) {
       var crep,
@@ -238,38 +257,13 @@
       var toReturn = '',
           selectedChar;
 
-      var i, j;
+      var i;
 
       theLoop:
       for (i = 0; i < apfb.length; ++i) {
         selectedChar = apfb.charCodeAt(i);
 
-        for (j = 0; j < charsMap.length; ++j) {
-          if (charsMap[j][4] === selectedChar ||
-            charsMap[j][2] === selectedChar ||
-            charsMap[j][1] === selectedChar ||
-            charsMap[j][3] === selectedChar) {
-
-            toReturn += String.fromCharCode(charsMap[j][0]);
-
-            continue theLoop;
-          }
-        }
-
-        for (j = 0; j < combCharsMap.length; ++j) {
-          if (combCharsMap[j][4] === selectedChar ||
-            combCharsMap[j][2] === selectedChar ||
-            combCharsMap[j][1] === selectedChar ||
-            combCharsMap[j][3] === selectedChar) {
-
-            toReturn += String.fromCharCode(combCharsMap[j][0][0]) +
-                        String.fromCharCode(combCharsMap[j][0][1]);
-
-            continue theLoop;
-          }
-        }
-
-        toReturn += String.fromCharCode(selectedChar);
+        toReturn += getOriginalCharsFromCode(selectedChar);
       }
 
       return toReturn;
