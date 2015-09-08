@@ -1,6 +1,6 @@
 {
   "name": "arabic-reshaper",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Reshapes Arabic words to work in non-supported environments.",
   "main": "index.js",
   "directories": {
