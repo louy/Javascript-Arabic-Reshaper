@@ -6,7 +6,7 @@
 (function (root, factory) {
 	var name = 'ArabicReshaper';
 	/* global define, module */
-
+	/* istanbul ignore next */
 	if (typeof define === 'function' && define.amd) {
 		// AMD. Register as an anonymous module.
 		define(factory);
