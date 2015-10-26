@@ -133,6 +133,8 @@
       }
     }
 
+    // We should never reach here...
+    // istanbul ignore next
     return false;
   }
 
