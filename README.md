@@ -4,7 +4,7 @@
 [![Codecov](https://img.shields.io/codecov/c/github/louy/Javascript-Arabic-Reshaper.svg)](https://codecov.io/github/louy/Javascript-Arabic-Reshaper/)
 [![Codacy](https://img.shields.io/codacy/7aeab38f4ce043be8e10a14707fdb7a8.svg)](https://www.codacy.com/app/louy/Javascript-Arabic-Reshaper)
 [![NPM](https://img.shields.io/npm/v/arabic-reshaper.svg)](https://www.npmjs.com/package/arabic-reshaper)
-[![VersionEye](https://img.shields.io/versioneye/d/nodejs/arabic-reshaper.svg)](https://www.versioneye.com/nodejs/arabic-reshaper/)
+[![VersionEye](https://img.shields.io/versioneye/d/user/projects/562e7f9836d0ab00210013bb.svg)](https://www.versioneye.com/nodejs/arabic-reshaper/)
 
 Reshapes Arabic words to work in non-supported environments and with custom web fonts.
 
