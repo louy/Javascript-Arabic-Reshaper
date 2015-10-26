@@ -65,4 +65,10 @@ describe('ArabicReshaper', function() {
     expect(ArabicReshaper.convertArabic(a)).to.equal(b);
     expect(ArabicReshaper.convertArabicBack(b)).to.equal(a);
   });
+
+  it('should convert compound chars correctly', function() {
+    var a = 'لالا للا', b = 'ﻻﻻ ﻟﻼ';
+    expect(ArabicReshaper.convertArabic(a)).to.equal(b);
+    expect(ArabicReshaper.convertArabicBack(b)).to.equal(a);
+  });
 });
