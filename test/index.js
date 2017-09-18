@@ -2,7 +2,7 @@
 var expect = require('chai').expect;
 
 describe('ArabicReshaper', function() {
-  var ArabicReshaper = require('..');
+  var ArabicReshaper = require('../dist/');
 
   it('should convert an isolated letter', function() {
     var a = String.fromCharCode(0x0633), b = String.fromCharCode(0xFEB1);
